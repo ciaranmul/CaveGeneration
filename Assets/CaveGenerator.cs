@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CaveGenerator : MonoBehaviour {
 
+	// PUBLIC VARIABLES EXPOSED TO THE EDITOR
 	public int width;
 	public int height;
 
@@ -19,6 +20,8 @@ public class CaveGenerator : MonoBehaviour {
 	[Range(0,100)]
 	public int fillChance;
 
+
+	// Tile map
 	bool[,] map;
 
 	// Use this for initialization
@@ -36,10 +39,7 @@ public class CaveGenerator : MonoBehaviour {
 	}
 
 	bool[,] initialiseMap(bool[,] map) {
-
-		string seed = Time.time.ToString ();
-
-		System.Random rand = new System.Random (seed.GetHashCode());
+		System.Random rand = new System.Random ();
 
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < width; y++) {
@@ -82,7 +82,7 @@ public class CaveGenerator : MonoBehaviour {
 				int neighbour_y = y + j;
 				if (i == 0 && j == 0) {
 					// looking at middle point, do nothing
-				} else if (neighbour_x < 0 || neighbour_y < 0 || neighbour_x >= map.GetLength (0) || neighbour_y >= map.GetLength (1)) {
+				} else if (x == 0 || y == 0 || neighbour_x >= (map.GetLength (0)-1) || neighbour_y >= (map.GetLength (1)-1)) {
 					// neighbour is at edge of map
 					count++;
 				}
