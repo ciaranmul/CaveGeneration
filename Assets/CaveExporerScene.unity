@@ -269,11 +269,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 100
-  height: 100
+  height: 160
   deathLimit: 4
   birthLimit: 4
   smoothing: 3
   fillChance: 44
+  seed: 
 --- !u!4 &835800723
 Transform:
   m_ObjectHideFlags: 0
@@ -365,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 1030524040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 10, y: 10, z: 16}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

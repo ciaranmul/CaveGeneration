@@ -20,6 +20,8 @@ public class CaveGenerator : MonoBehaviour {
 	[Range(0,100)]
 	public int fillChance;
 
+	public string seed;
+
 
 	// Tile map
 	bool[,] map;
@@ -38,12 +40,23 @@ public class CaveGenerator : MonoBehaviour {
 		
 	}
 
-	bool[,] initialiseMap(bool[,] map) {
-		System.Random rand = new System.Random ();
+	System.Random checkForSeed(){
+		System.Random rand;
 
+		if (seed == "") {
+			rand = new System.Random ();
+		} else {
+			rand = new System.Random (seed.GetHashCode ());
+		}
+
+		return rand;
+	}
+
+	bool[,] initialiseMap(bool[,] map) {
+		System.Random rand = checkForSeed ();
 		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < width; y++) {
-				if (rand.Next(0,100) < fillChance) {
+			for (int y = 0; y < height; y++) {
+				if (rand.Next (0, 100) < fillChance) {
 					map [x, y] = true;
 				}
 			}
