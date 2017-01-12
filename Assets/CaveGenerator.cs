@@ -26,6 +26,9 @@ public class CaveGenerator : MonoBehaviour {
 	// Tile map
 	bool[,] map;
 
+	// Wall Transform
+	public Transform Wall;
+
 	// Use this for initialization
 	void Start () {
 		map = new bool[width, height];
@@ -33,11 +36,12 @@ public class CaveGenerator : MonoBehaviour {
 		for(int i=0; i<smoothing; i++){
 			map = doSmoothing (map);
 		}
+		populateGameObjects ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	System.Random checkForSeed(){
@@ -108,17 +112,30 @@ public class CaveGenerator : MonoBehaviour {
 		return count;
 	}
 
-	void OnDrawGizmos() {
+	void populateGameObjects() {
 		if (map != null) {
-			for (int x = 0; x < width; x ++) {
-				for (int y = 0; y < height; y ++) {
-					Gizmos.color = Color.black;
-					if (map [x, y] == true) {
-						Vector3 pos = new Vector3 (-width / 2 + x + .5f, 0.5f, -height / 2 + y + .5f);
-						Gizmos.DrawCube (pos, Vector3.one);
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					if (map [x,y] == true) {
+						Vector3 pos = new Vector3 (-width / 2 + x + .5f, 5, -height / 2 + y + .5f);
+						Instantiate (Wall, pos, Quaternion.identity);
 					}
 				}
 			}
 		}
 	}
+
+	//void OnDrawGizmos() {
+	//	if (map != null) {
+	//		for (int x = 0; x < width; x ++) {
+	//			for (int y = 0; y < height; y ++) {
+	//				Gizmos.color = Color.black;
+	//				if (map [x, y] == true) {
+	//					Vector3 pos = new Vector3 (-width / 2 + x + .5f, 0.5f, -height / 2 + y + .5f);
+	//					Gizmos.DrawCube (pos, Vector3.one);
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 }
