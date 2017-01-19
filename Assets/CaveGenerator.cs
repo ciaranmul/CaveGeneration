@@ -22,12 +22,17 @@ public class CaveGenerator : MonoBehaviour {
 
 	public string seed;
 
+	public int treasureLimit;
+
 
 	// Tile map
 	bool[,] map;
 
 	// Wall Transform
 	public Transform Wall;
+
+	// Treasure Transform
+	public Transform Treasure;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +42,7 @@ public class CaveGenerator : MonoBehaviour {
 			map = doSmoothing (map);
 		}
 		populateGameObjects ();
+		populateTreasure (map);
 	}
 
 	// Update is called once per frame
@@ -110,6 +116,24 @@ public class CaveGenerator : MonoBehaviour {
 			}
 		}
 		return count;
+	}
+
+	void populateTreasure(bool[,] map){
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				if (map [x, y] == false) {
+					int nbrs = countNeighbours (map, x, y);
+					if (nbrs >= treasureLimit) {
+						placeTreasure (x, y);
+					}
+				}
+			}
+		}
+	}
+
+	void placeTreasure(int x, int y){
+		Vector3 pos = new Vector3 (-width / 2 + x + .5f, 1, -height / 2 + y + .5f);
+		Instantiate (Treasure, pos, Quaternion.identity);
 	}
 
 	void populateGameObjects() {
