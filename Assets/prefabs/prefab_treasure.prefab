@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23789608205706414}
   m_Layer: 0
   m_Name: prefab_treasure
-  m_TagString: Untagged
+  m_TagString: Treasure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
